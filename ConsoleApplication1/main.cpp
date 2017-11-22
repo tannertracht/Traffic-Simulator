@@ -9,12 +9,13 @@ int main()
 	sf::RenderWindow window(sf::VideoMode(800, 800), "SFML works!");
 	sf::RenderWindow* pointerWindow = &window;
 	laneQueue lane(pointerWindow);
+	bool green = false;
 	while (window.isOpen())
 	{
 		sf::Event event;
 		window.clear();
 		lane.drawCars();
-		lane.moveCars();
+		lane.moveCarsToStopLine();
 		while (window.pollEvent(event))
 		{
 			if (event.type == sf::Event::Closed) {
@@ -23,6 +24,9 @@ int main()
 			else if (event.type == sf::Event::KeyPressed) {
 				if (event.key.code == sf::Keyboard::C) {
 					lane.addCar();
+				}
+				else if (event.key.code == sf::Keyboard::G) {
+					green = true;
 				}
 			}
 		}

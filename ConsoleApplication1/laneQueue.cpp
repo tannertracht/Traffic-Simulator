@@ -59,7 +59,7 @@ void laneQueue::drawCars()
 	window->draw(temp->image);
 }
 
-void laneQueue::moveCars()
+void laneQueue::moveCarsToStopLine()
 {
 	bool search = true;
 	if (head == nullptr) {
@@ -68,33 +68,40 @@ void laneQueue::moveCars()
 	carNode* temp = head;
 	do {
 		// Moves the image
-		if (temp->getNext() != nullptr) {
-			if ((abs(temp->getNext()->image.getPosition().x - temp->image.getPosition().x)) >= 200) {
+		if (temp->image.getPosition().x <= window->getSize().x/2){
+			// If the image has reached the stop line it will not advance
+		}
+		else if (temp->getNext() != nullptr) {
+			// Checks if the image is the first image in the queue
+			if ((abs(temp->getNext()->image.getPosition().x - temp->image.getPosition().x)) >= (temp->image.getSize().x + 25)) {
+				// If it isn't the first image it will check the spacing between itself and the next car and only move 
+				// if it has the space
 				temp->image.move(-0.05f, 0);
 			}
 		}
 		else {
+			// If the image is the front image it does not check for spacing in front
 			temp->image.move(-0.05f, 0);
 		}
 		// Checks if the image is still on the screen (left side)
-		if (temp->image.getPosition().x < 0) {
-			// Removed images that have left the screen
-			if (temp->getPrevious() == nullptr) {
-				pop();
-				return;
-			}
-			else {
-				temp = temp->getPrevious();
-				pop();
-			}
+		//if (temp->image.getPosition().x < 0) {
+		//	// Removed images that have left the screen
+		//	if (temp->getPrevious() == nullptr) {
+		//		pop();
+		//		return;
+		//	}
+		//	else {
+		//		temp = temp->getPrevious();
+		//		pop();
+		//	}
+		//}
+		//else {
+		if (temp->getPrevious() != nullptr) {
+			temp = temp->getPrevious();
 		}
 		else {
-			if (temp->getPrevious() != nullptr) {
-				temp = temp->getPrevious();
-			}
-			else {
-				return;
-			}
+			return;
 		}
+		//}
 	} while (search);
 }

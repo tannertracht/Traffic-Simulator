@@ -8,9 +8,10 @@ public:
 	void addCar();
 	void pop();
 	void drawCars();
-	void moveCars();
+	void moveCarsToStopLine();
 private:
 	sf::RenderWindow* window;
 	carNode* head;
+	bool green = false;
 };
 
