@@ -1,5 +1,6 @@
 #include "laneQueue.h"
 #include <iostream>
+#include <stdlib.h>
 using namespace std;
 laneQueue::laneQueue(sf::RenderWindow* realWindow)
 {
@@ -24,6 +25,7 @@ void laneQueue::addCar()
 		temp = temp->getPrevious();
 	}
 	temp->setPrevious(newCar);
+	newCar->setNext(temp);
 	return;
 }
 
@@ -37,6 +39,9 @@ void laneQueue::pop()
 		temp = *head;
 		delete head;
 		head = temp.getPrevious();
+		if (head != nullptr) {
+			head->setNext(nullptr);
+		}
 		return;
 	}
 }
@@ -62,8 +67,18 @@ void laneQueue::moveCars()
 	}
 	carNode* temp = head;
 	do {
-		temp->image.move(-0.05f, 0);
+		// Moves the image
+		if (temp->getNext() != nullptr) {
+			if ((abs(temp->getNext()->image.getPosition().x - temp->image.getPosition().x)) >= 200) {
+				temp->image.move(-0.05f, 0);
+			}
+		}
+		else {
+			temp->image.move(-0.05f, 0);
+		}
+		// Checks if the image is still on the screen (left side)
 		if (temp->image.getPosition().x < 0) {
+			// Removed images that have left the screen
 			if (temp->getPrevious() == nullptr) {
 				pop();
 				return;
