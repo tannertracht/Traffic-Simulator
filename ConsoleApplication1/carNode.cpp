@@ -2,14 +2,14 @@
 
 
 
-carNode::carNode()
+carNode::carNode(sf::Vector2i startPos)
 {
 	previous = nullptr;
 	next = nullptr;
-	image.setSize(sf::Vector2f(50, 50));
+	image.setSize(sf::Vector2f(25, 25));
 	image.setOutlineColor(sf::Color::Red);
 	image.setOutlineThickness(5);
-	image.setPosition(750, 50);
+	image.setPosition(startPos.x, startPos.y);
 	image.setOrigin(image.getSize().x / 2, image.getSize().y / 2);
 }
 

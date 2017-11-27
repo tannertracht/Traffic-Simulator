@@ -3,7 +3,7 @@
 class carNode
 {
 public:
-	carNode();
+	carNode(sf::Vector2i);
 	~carNode();
 	carNode* getPrevious();
 	void setPrevious(carNode*);

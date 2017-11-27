@@ -8,25 +8,40 @@ int main()
 {
 	sf::RenderWindow window(sf::VideoMode(800, 800), "SFML works!");
 	sf::RenderWindow* pointerWindow = &window;
-	laneQueue lane(pointerWindow);
+	laneQueue northLane(pointerWindow, "north");
+	laneQueue eastLane(pointerWindow, "east");
+	laneQueue southLane(pointerWindow, "south");
+	laneQueue westLane(pointerWindow, "west");
 	bool green = false;
 	while (window.isOpen())
 	{
 		sf::Event event;
 		window.clear();
-		lane.drawCars();
-		lane.moveCarsToStopLine();
+		northLane.drawCars();
+		northLane.moveCarsToStopLine();
+		eastLane.drawCars();
+		eastLane.moveCarsToStopLine();
+		southLane.drawCars();
+		southLane.moveCarsToStopLine();
+		westLane.drawCars();
+		westLane.moveCarsToStopLine();
 		while (window.pollEvent(event))
 		{
 			if (event.type == sf::Event::Closed) {
 				window.close();
 			}
 			else if (event.type == sf::Event::KeyPressed) {
-				if (event.key.code == sf::Keyboard::C) {
-					lane.addCar();
+				if (event.key.code == sf::Keyboard::Up) {
+					northLane.addCar();
 				}
-				else if (event.key.code == sf::Keyboard::G) {
-					green = true;
+				else if (event.key.code == sf::Keyboard::Right) {
+					eastLane.addCar();
+				}
+				else if (event.key.code == sf::Keyboard::Down) {
+					southLane.addCar();
+				}
+				else if (event.key.code == sf::Keyboard::Left) {
+					westLane.addCar();
 				}
 			}
 		}
