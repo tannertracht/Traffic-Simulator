@@ -1,9 +1,9 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
 #include "laneQueue.h"
 using namespace std;
-// Figure out how to use getPosition
-// pop objects off the queue when they leave the window
 int main()
 {
 	sf::RenderWindow window(sf::VideoMode(800, 800), "SFML works!");
@@ -13,9 +13,28 @@ int main()
 	laneQueue southLane(pointerWindow, "south");
 	laneQueue westLane(pointerWindow, "west");
 	bool green = false;
+	int chance;
+	srand(time(NULL));
+	sf::Clock carGenerationTimer;
 	while (window.isOpen())
 	{
 		sf::Event event;
+		if (carGenerationTimer.getElapsedTime().asSeconds() >= 1) {
+			chance = rand() % 4;
+			if (chance == 0) {
+				northLane.addCar();
+			}
+			else if (chance == 1) {
+				eastLane.addCar();
+			}
+			else if (chance == 2) {
+				southLane.addCar();
+			}
+			else if (chance == 3) {
+				westLane.addCar();
+			}
+			carGenerationTimer.restart();
+		}
 		window.clear();
 		northLane.drawCars();
 		northLane.moveCarsToStopLine();

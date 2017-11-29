@@ -15,6 +15,7 @@ private:
 	carNode* head;
 	bool green = false;
 	float speed = 0.05f;
+	int stopLineDistance;
 	sf::Vector2i startPos;
 	sf::Vector2f movement;
 	std::string movementDirection;

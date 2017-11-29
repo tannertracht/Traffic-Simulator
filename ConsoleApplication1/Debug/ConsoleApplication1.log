@@ -1,3 +1,4 @@
-﻿  laneQueue.cpp
+﻿  main.cpp
+c:\users\tanner tracht\documents\visual studio 2015\projects\consoleapplication1\consoleapplication1\main.cpp(17): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
   ConsoleApplication1.vcxproj -> C:\Users\Tanner Tracht\documents\visual studio 2015\Projects\ConsoleApplication1\Debug\ConsoleApplication1.exe
   ConsoleApplication1.vcxproj -> C:\Users\Tanner Tracht\documents\visual studio 2015\Projects\ConsoleApplication1\Debug\ConsoleApplication1.pdb (Full PDB)

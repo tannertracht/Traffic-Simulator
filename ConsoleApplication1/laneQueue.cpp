@@ -7,6 +7,7 @@ laneQueue::laneQueue(sf::RenderWindow* realWindow, string direction)
 	movementDirection = direction;
 	head = nullptr;
 	window = realWindow;
+	stopLineDistance = window->getSize().x / 10;
 	if (direction == "north") {
 		startPos.x = window->getSize().x / 2 + 25;
 		startPos.y = window->getSize().y;
@@ -94,16 +95,16 @@ void laneQueue::moveCarsToStopLine()
 	do {
 		stop = false;
 		// Checks if car is past the decided stop line (could be optimized)
-		if (movementDirection == "north" && temp->image.getPosition().y <= window->getSize().y / 2) {
+		if (movementDirection == "north" && temp->image.getPosition().y <= window->getSize().y / 2 + stopLineDistance) {
 			stop = true;
 		}
-		else if (movementDirection == "east" && temp->image.getPosition().x >= window->getSize().x / 2) {
+		else if (movementDirection == "east" && temp->image.getPosition().x >= window->getSize().x / 2 - stopLineDistance) {
 			stop = true;
 		}
-		else if (movementDirection == "south" && temp->image.getPosition().y >= window->getSize().y / 2) {
+		else if (movementDirection == "south" && temp->image.getPosition().y >= window->getSize().y / 2 - stopLineDistance) {
 			stop = true;
 		}
-		else if (movementDirection == "west" && temp->image.getPosition().x <= window->getSize().x / 2) {
+		else if (movementDirection == "west" && temp->image.getPosition().x <= window->getSize().x / 2 + stopLineDistance) {
 			stop = true;
 		}
 		// Moves the image
